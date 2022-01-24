@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spark MLlib &#8212; Spark笔记</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Structured Streaming" href="stream/0.html" />
+    <link rel="prev" title="Hive + Spark" href="sql/7.hive.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/eula.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Spark笔记</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Spark 笔记
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="rdd/0.html">
+   基础知识
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/1.word count.html">
+     Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/2.create rdd.html">
+     创建 RDD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/3.rdd operator.html">
+     RDD 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/4.cache.html">
+     RDD Cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/5.broadcast.html">
+     广播变量 &amp; 累加器
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="rdd/6.config.html">
+     Spark 配置项
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="sql/0.html">
+   Spark SQL
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/1.lottery.html">
+     小汽车摇号分析
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/2.create df.html">
+     创建 DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/3.sql query.html">
+     SQL 语句
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/4.operators.html">
+     DataFrame 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/5.join.html">
+     数据关联
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/6.functions.html">
+     函数
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sql/7.hive.html">
+     Hive + Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Spark MLlib
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="stream/0.html">
+   Structured Streaming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="stream/1.stream word count.html">
+     流动的 Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="stream/2.mode.html">
+     Batch mode 和 Continuous mode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="stream/3.window.html">
+     Window 操作 &amp; Watermark
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="stream/4.kafka.html">
+     Spark + Kafka
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/mllib.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmllib.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/mllib.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   载入数据
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   特征工程
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   创建和训练模型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pipeline">
+   使用 Pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-hot">
+     One-hot 编码
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   模型评估
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   保存和加载模型
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   树模型
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     随机森林
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k">
+   k-折交叉验证
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   优化 Pipeline
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="spark-mllib">
+<h1>Spark MLlib<a class="headerlink" href="#spark-mllib" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>我们从 Airbnb 房屋租金预测这个小项目入手，来学习 Spark MLlib 的基本用法。</p>
+</div>
+<div class="section" id="id1">
+<h2>载入数据<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;design ml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filePath</span> <span class="o">=</span> <span class="s2">&quot;../data/sf-airbnb/sf-airbnb-clean.parquet/&quot;</span>
+<span class="n">airbnbDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
+<span class="n">airbnbDF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;neighbourhood_cleansed&quot;</span><span class="p">,</span> <span class="s2">&quot;room_type&quot;</span><span class="p">,</span> <span class="s2">&quot;bedrooms&quot;</span><span class="p">,</span> <span class="s2">&quot;bathrooms&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;number_of_reviews&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+----------------------+---------------+--------+---------+-----------------+-----+
+|neighbourhood_cleansed|      room_type|bedrooms|bathrooms|number_of_reviews|price|
++----------------------+---------------+--------+---------+-----------------+-----+
+|      Western Addition|Entire home/apt|     1.0|      1.0|            180.0|170.0|
+|        Bernal Heights|Entire home/apt|     2.0|      1.0|            111.0|235.0|
+|        Haight Ashbury|   Private room|     1.0|      4.0|             17.0| 65.0|
+|        Haight Ashbury|   Private room|     1.0|      4.0|              8.0| 65.0|
+|      Western Addition|Entire home/apt|     2.0|      1.5|             27.0|785.0|
++----------------------+---------------+--------+---------+-----------------+-----+
+only showing top 5 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建训练和测试集</span>
+<span class="n">trainDF</span><span class="p">,</span> <span class="n">testDF</span> <span class="o">=</span> <span class="n">airbnbDF</span><span class="o">.</span><span class="n">randomSplit</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>特征工程<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">VectorAssembler</span></code> takes a list of input columns and creates a new DataFrame with an additional column which combines
+the values of those input columns into a single vector:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">VectorAssembler</span>
+
+<span class="n">vecAssembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bedrooms&quot;</span><span class="p">],</span> 
+                               <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">)</span>
+<span class="n">vecTrainDF</span> <span class="o">=</span> <span class="n">vecAssembler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+<span class="n">vecTrainDF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;bedrooms&quot;</span><span class="p">,</span> <span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+--------+-----+
+|bedrooms|features|price|
++--------+--------+-----+
+|     1.0|   [1.0]|200.0|
+|     1.0|   [1.0]|130.0|
+|     1.0|   [1.0]| 95.0|
+|     1.0|   [1.0]|250.0|
+|     3.0|   [3.0]|250.0|
+|     1.0|   [1.0]|115.0|
+|     1.0|   [1.0]|105.0|
+|     1.0|   [1.0]| 86.0|
+|     1.0|   [1.0]|100.0|
+|     2.0|   [2.0]|220.0|
++--------+--------+-----+
+only showing top 10 rows
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>创建和训练模型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.regression</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">featuresCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
+<span class="n">lrModel</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">vecTrainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lrModel</span><span class="o">.</span><span class="n">coefficients</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">lrModel</span><span class="o">.</span><span class="n">intercept</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The formula for the linear regression line is price = </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">*bedrooms + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The formula for the linear regression line is price = 123.68*bedrooms + 47.51
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pipeline">
+<h2>使用 Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<p>便于复用</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">vecAssembler</span><span class="p">,</span> <span class="n">lr</span><span class="p">])</span>
+<span class="n">pipelineModel</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preDF</span> <span class="o">=</span> <span class="n">pipelineModel</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">testDF</span><span class="p">)</span>
+<span class="n">preDF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;bedrooms&quot;</span><span class="p">,</span> <span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;prediction&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------+--------+------+------------------+
+|bedrooms|features| price|        prediction|
++--------+--------+------+------------------+
+|     1.0|   [1.0]|  85.0|171.18598011578285|
+|     1.0|   [1.0]|  45.0|171.18598011578285|
+|     1.0|   [1.0]|  70.0|171.18598011578285|
+|     1.0|   [1.0]| 128.0|171.18598011578285|
+|     1.0|   [1.0]| 159.0|171.18598011578285|
+|     2.0|   [2.0]| 250.0|294.86172649777757|
+|     1.0|   [1.0]|  99.0|171.18598011578285|
+|     1.0|   [1.0]|  95.0|171.18598011578285|
+|     1.0|   [1.0]| 100.0|171.18598011578285|
+|     1.0|   [1.0]|2010.0|171.18598011578285|
++--------+--------+------+------------------+
+only showing top 10 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="one-hot">
+<h3>One-hot 编码<a class="headerlink" href="#one-hot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StringIndexer</span>
+
+<span class="n">categoricalCols</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">dataType</span><span class="p">)</span> <span class="ow">in</span> <span class="n">trainDF</span><span class="o">.</span><span class="n">dtypes</span> 
+                   <span class="k">if</span> <span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">]</span>
+<span class="n">indexOutputCols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="s2">&quot;Index&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">categoricalCols</span><span class="p">]</span>
+<span class="n">oheOutputCols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="s2">&quot;OHE&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">categoricalCols</span><span class="p">]</span>
+
+<span class="c1"># 首先使用 StringIndexer 把字符串转化为 index</span>
+<span class="n">stringIndexer</span> <span class="o">=</span> <span class="n">StringIndexer</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">categoricalCols</span><span class="p">,</span> 
+                              <span class="n">outputCols</span><span class="o">=</span><span class="n">indexOutputCols</span><span class="p">,</span> 
+                              <span class="n">handleInvalid</span><span class="o">=</span><span class="s2">&quot;skip&quot;</span><span class="p">)</span>
+<span class="c1"># 再使用 OneHotEncoder 把 index 转化为 one-hot</span>
+<span class="n">oheEncoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">indexOutputCols</span><span class="p">,</span>
+                           <span class="n">outputCols</span><span class="o">=</span><span class="n">oheOutputCols</span><span class="p">)</span>
+
+<span class="n">numericalCols</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">dataType</span><span class="p">)</span> <span class="ow">in</span> <span class="n">trainDF</span><span class="o">.</span><span class="n">dtypes</span> 
+                 <span class="k">if</span> <span class="p">((</span><span class="n">dataType</span> <span class="o">==</span> <span class="s2">&quot;double&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">field</span> <span class="o">!=</span> <span class="s2">&quot;price&quot;</span><span class="p">))]</span>
+<span class="n">vecAssembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">oheOutputCols</span> <span class="o">+</span> <span class="n">numericalCols</span><span class="p">,</span>
+                               <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">featuresCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">stringIndexer</span><span class="p">,</span> <span class="n">oheEncoder</span><span class="p">,</span> <span class="n">vecAssembler</span><span class="p">,</span> <span class="n">lr</span><span class="p">])</span>
+<span class="n">pipelineModel</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+
+<span class="n">predDF</span> <span class="o">=</span> <span class="n">pipelineModel</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">testDF</span><span class="p">)</span>
+<span class="n">predDF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;prediction&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------------+-----+------------------+
+|            features|price|        prediction|
++--------------------+-----+------------------+
+|(98,[0,3,6,22,43,...| 85.0| 55.24365707389188|
+|(98,[0,3,6,22,43,...| 45.0|23.357685914717877|
+|(98,[0,3,6,22,43,...| 70.0|28.474464479034395|
+|(98,[0,3,6,12,42,...|128.0| -91.6079079594947|
+|(98,[0,3,6,12,43,...|159.0| 95.05688229945372|
++--------------------+-----+------------------+
+only showing top 5 rows
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>模型评估<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.evaluation</span> <span class="kn">import</span> <span class="n">RegressionEvaluator</span>
+
+<span class="n">regressionEvaluator</span> <span class="o">=</span> <span class="n">RegressionEvaluator</span><span class="p">(</span><span class="n">predictionCol</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> 
+                                          <span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> 
+                                          <span class="n">metricName</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">)</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">regressionEvaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">predDF</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE is </span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE is 220.6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another metric:</p>
+<div class="math notranslate nohighlight">
+\[R^{2} = 1 - \frac{SS_{res}}{SS_{tot}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(SS_{tot}\)</span> is the total sum of square if you always predict <span class="math notranslate nohighlight">\(\bar{y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[SS_{tot} = \sum_{i=1}^{n}(y_{i} - \bar{y})^{2}\]</div>
+<p>and <span class="math notranslate nohighlight">\(SS_{res}\)</span> is the sum of residuals squared from your model predictions:</p>
+<div class="math notranslate nohighlight">
+\[SS_{res} = \sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span> <span class="o">=</span> <span class="n">regressionEvaluator</span><span class="o">.</span><span class="n">setMetricName</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">predDF</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R2 is </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R2 is 0.16043316698848087
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>保存和加载模型<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 保存</span>
+<span class="n">pipelinePath</span> <span class="o">=</span> <span class="s2">&quot;../data/tmp/lr-pipeline-model&quot;</span>
+<span class="n">pipelineModel</span><span class="o">.</span><span class="n">write</span><span class="p">()</span><span class="o">.</span><span class="n">overwrite</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">pipelinePath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">PipelineModel</span>
+
+<span class="c1"># 加载</span>
+<span class="n">savedPipelineModel</span> <span class="o">=</span> <span class="n">PipelineModel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">pipelinePath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>树模型<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.regression</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
+
+<span class="c1"># 在 DecisionTree 中不使用 one-hot 编码</span>
+<span class="n">vecAssembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">indexOutputCols</span> <span class="o">+</span> <span class="n">numericalCols</span><span class="p">,</span> 
+                               <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">)</span>
+<span class="c1"># crucial for performing distributed training</span>
+<span class="c1"># requires maxBins &gt;= the number of values in each categorical feature</span>
+<span class="n">dt</span><span class="o">.</span><span class="n">setMaxBins</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressor_bb58b45f8dac
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stages</span> <span class="o">=</span> <span class="p">[</span><span class="n">stringIndexer</span><span class="p">,</span> <span class="n">vecAssembler</span><span class="p">,</span> <span class="n">dt</span><span class="p">]</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="n">stages</span><span class="p">)</span>
+<span class="n">pipelineModel</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extract the if-then-else rules learned by the decision tree</span>
+<span class="n">dtModel</span> <span class="o">=</span> <span class="n">pipelineModel</span><span class="o">.</span><span class="n">stages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dtModel</span><span class="o">.</span><span class="n">toDebugString</span><span class="p">[:</span> <span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressionModel: uid=DecisionTreeRegressor_bb58b45f8dac, depth=5, numNodes=47, numFeatures=33
+  If (feature 12 &lt;= 2.5)
+   If (feature 12 &lt;= 1.5)
+    If (feature 5 in {1.0,2.0})
+     If (feature 4 in {0.0,1.0,3.0,5.0,9.0,10.0,11.0,13.0,14.0,16.0,18.0,24.0})
+      If (feature 3 in {0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0})
+       Predict: 104.23992784125075
+      Else (feature 3 not in {0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,23.0,24.0,25.0,26.0,27.0,28.0,29.0,30.0,31.0,32.0,33.0,34.0})
+       Predict: 250.7111111111111
+     Else (feature 4 not in {0.0,1.0,3.0,5.0,9.0,10.0,11.0,13.0,14.0,16.0,18.0,24.0})
+      If (feature 3 in {0.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0,18.0,19.0,20.0,21.0,22.0,23.0,27.0,33.0,35.0})
+       Predict: 151.94179894179894
+      Else (feat
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># extract the feature importance scores</span>
+<span class="n">featureImp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vecAssembler</span><span class="o">.</span><span class="n">getInputCols</span><span class="p">(),</span> 
+                                   <span class="n">dtModel</span><span class="o">.</span><span class="n">featureImportances</span><span class="p">)),</span> 
+                          <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;importance&quot;</span><span class="p">])</span>
+<span class="n">featureImp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;importance&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12</th>
+      <td>bedrooms</td>
+      <td>0.283406</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>cancellation_policyIndex</td>
+      <td>0.167893</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>instant_bookableIndex</td>
+      <td>0.140081</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>property_typeIndex</td>
+      <td>0.128179</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>number_of_reviews</td>
+      <td>0.126233</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>neighbourhood_cleansedIndex</td>
+      <td>0.056200</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>longitude</td>
+      <td>0.038810</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>minimum_nights</td>
+      <td>0.029473</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>beds</td>
+      <td>0.015218</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>room_typeIndex</td>
+      <td>0.010905</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="id7">
+<h3>随机森林<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.regression</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">maxBins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="k">
+<h2>k-折交叉验证<a class="headerlink" href="#k" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.tuning</span> <span class="kn">import</span> <span class="n">ParamGridBuilder</span>
+
+<span class="c1"># 创建随机森林 pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span> <span class="o">=</span> <span class="p">[</span><span class="n">stringIndexer</span><span class="p">,</span> <span class="n">vecAssembler</span><span class="p">,</span> <span class="n">rf</span><span class="p">])</span>
+<span class="c1"># 搜索空间</span>
+<span class="n">paramGrid</span> <span class="o">=</span> <span class="p">(</span><span class="n">ParamGridBuilder</span><span class="p">()</span>
+             <span class="o">.</span><span class="n">addGrid</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">maxDepth</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+             <span class="o">.</span><span class="n">addGrid</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">numTrees</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+             <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">RegressionEvaluator</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span>
+                                <span class="n">predictionCol</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span>
+                                <span class="n">metricName</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.ml.tuning</span> <span class="kn">import</span> <span class="n">CrossValidator</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">CrossValidator</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> 
+                    <span class="n">evaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">,</span> 
+                    <span class="n">estimatorParamMaps</span><span class="o">=</span><span class="n">paramGrid</span><span class="p">,</span> 
+                    <span class="n">numFolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">cvModel</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 获取验证结果</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cvModel</span><span class="o">.</span><span class="n">getEstimatorParamMaps</span><span class="p">(),</span> <span class="n">cvModel</span><span class="o">.</span><span class="n">avgMetrics</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 2,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 10},
+  291.18226409247836),
+ ({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 2,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 100},
+  286.7714750274078),
+ ({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 4,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 10},
+  287.6963245160818),
+ ({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 4,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 100},
+  279.99270572360797),
+ ({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 6,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 10},
+  294.34810870889305),
+ ({Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;maxDepth&#39;, doc=&#39;Maximum depth of the tree. (&gt;= 0) E.g., depth 0 means 1 leaf node; depth 1 means 1 internal node + 2 leaf nodes. Must be in range [0, 30].&#39;): 6,
+   Param(parent=&#39;RandomForestRegressor_7881b42f1736&#39;, name=&#39;numTrees&#39;, doc=&#39;Number of trees to train (&gt;= 1).&#39;): 100},
+  275.3986270472998)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>优化 Pipeline<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Even though each of the models in the cross validator is technically independent, <a class="reference external" href="http://spark.ml">spark.ml</a> actually trains the collection of models sequentially rather than in parallel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加速训练，并行度为4</span>
+<span class="n">cvModel</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">CrossValidator</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">rf</span><span class="p">,</span>
+                    <span class="n">evaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">,</span>
+                    <span class="n">estimatorParamMaps</span><span class="o">=</span><span class="n">paramGrid</span><span class="p">,</span>
+                    <span class="n">numFolds</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">parallelism</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># won’t be reevaluating the StringIndexer</span>
+<span class="c1"># 速度更快一些</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">stringIndexer</span><span class="p">,</span> <span class="n">vecAssembler</span><span class="p">,</span> <span class="n">cv</span><span class="p">])</span>
+<span class="n">pipelineModel</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainDF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="sql/7.hive.html" title="previous page">Hive + Spark</a>
+    <a class='right-next' id="next-link" href="stream/0.html" title="next page">Structured Streaming</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Summer Lucky Bright<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spark + Kafka &#8212; Spark笔记</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Window 操作 &amp; Watermark" href="3.window.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/eula.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Spark笔记</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Spark 笔记
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rdd/0.html">
+   基础知识
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/1.word count.html">
+     Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/2.create rdd.html">
+     创建 RDD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/3.rdd operator.html">
+     RDD 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/4.cache.html">
+     RDD Cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/5.broadcast.html">
+     广播变量 &amp; 累加器
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/6.config.html">
+     Spark 配置项
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../sql/0.html">
+   Spark SQL
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/1.lottery.html">
+     小汽车摇号分析
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/2.create df.html">
+     创建 DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/3.sql query.html">
+     SQL 语句
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/4.operators.html">
+     DataFrame 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/5.join.html">
+     数据关联
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/6.functions.html">
+     函数
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../sql/7.hive.html">
+     Hive + Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mllib.html">
+   Spark MLlib
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="0.html">
+   Structured Streaming
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.stream word count.html">
+     流动的 Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.mode.html">
+     Batch mode 和 Continuous mode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.window.html">
+     Window 操作 &amp; Watermark
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Spark + Kafka
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/stream/4.kafka.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fstream/4.kafka.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/stream/4.kafka.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kafka">
+   Kafka 简介
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   消息的消费
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   再次写入 Kafka
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="spark-kafka">
+<h1>Spark + Kafka<a class="headerlink" href="#spark-kafka" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Structured Streaming 支持多种 Source，而在这些 Source 中，Kafka 的应用最为广泛。</p>
+</div>
+<div class="section" id="kafka">
+<h2>Kafka 简介<a class="headerlink" href="#kafka" title="Permalink to this headline">¶</a></h2>
+<p>在大数据的流计算生态中，Kafka 是应用最为广泛的消息中间件（Messaging Queue），消息中间件的核心功能有以下三点:</p>
+<ol class="simple">
+<li><p>连接消息生产者和消费者</p></li>
+<li><p>缓存生产者生产的消息</p></li>
+<li><p>有能力让消费者以最低延迟访问到消息</p></li>
+</ol>
+<p>消息中间件的存在，让生产者和消费者这两个系统之间，享有解耦、异步、削峰这三大收益。</p>
+<p>Kafka 为无主架构，它依赖 ZooKeeper 来存储并维护全局元信息。所谓元信息，它指的是消息在 Kafka 集群中的分布与状态。<br/>
+Kafka 集群中的每台 Server 被称为 Kafka Broker，Broker 的职责在于存储生产者生产的消息，并为消费者提供数据访问，Broker 与 Broker 之间相互独立。</p>
+<p>在逻辑上，消息隶属于一个又一个的 Topic，也就是消息的话题。<br/>
+为了提供数据访问的高可用，在生产者把消息写入主分区（Leader）之后，Kafka 会把消息同步到多个分区副本（Follower）。</p>
+<p><img alt="jupyter" src="../_images/kafka.webp" /></p>
+</div>
+<div class="section" id="id1">
+<h2>消息的消费<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>本节的实例是资源利用率实时计算。<br/>
+首先搜集集群中每台机器的资源（CPU、内存）利用率，并将其写入 Kafka.<br/>
+然后我们用 Spark Structured Streaming 来消费 Kafka 数据流并将信息打印到 console.<br/>
+最后对资源利用率数据做初步的分析与聚合，通过 Structured Streaming 将聚合结果写回到 Kafka.</p>
+<p>我们主要关注后两步。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 消息的消费</span>
+<span class="c1"># option 指定 Kafka Broker 地址</span>
+<span class="c1"># option 指定 Topic</span>
+<span class="n">dfCPU</span> <span class="o">=</span> <span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">readStream</span>
+         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;kafka&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;kafka.bootstrap.servers&quot;</span><span class="p">,</span> <span class="s2">&quot;hostname1:9092,hostname2:9092,hostname3:9092&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;subscribe&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu-monitor&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">load</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将信息打印到 console</span>
+<span class="p">(</span><span class="n">dfCPU</span><span class="o">.</span><span class="n">writeStream</span>
+ <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;Complete&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">Trigger</span><span class="o">.</span><span class="n">ProcessingTime</span><span class="p">(</span><span class="mf">10.</span><span class="n">seconds</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+ <span class="o">.</span><span class="n">awaitTermination</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>再次写入 Kafka<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 聚合并把结果写回 Kafka</span>
+<span class="p">(</span><span class="n">dfCPU</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">StringType</span><span class="p">()))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">FloatType</span><span class="p">()))</span>
+ <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">StringType</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">writeStream</span>
+ <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;Complete&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;kafka&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;kafka.bootstrap.servers&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost:9092&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu-monitor-agg-result&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/tmp/checkpoint&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">Trigger</span><span class="o">.</span><span class="n">ProcessingTime</span><span class="p">(</span><span class="mf">10.</span><span class="n">seconds</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+ <span class="o">.</span><span class="n">awaitTermination</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>这里有两点需要特别注意：</p>
+<ol class="simple">
+<li><p>读取与写入的 Topic 要分开，以免造成逻辑与数据上的混乱。</p></li>
+<li><p>写回 Kafka 的数据，在 Schema 上必须用“key”和“value”这两个固定的字段。</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./stream"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="3.window.html" title="previous page">Window 操作 &amp; Watermark</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Summer Lucky Bright<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hive + Spark &#8212; Spark笔记</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spark MLlib" href="../mllib.html" />
+    <link rel="prev" title="函数" href="6.functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/eula.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Spark笔记</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Spark 笔记
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rdd/0.html">
+   基础知识
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/1.word count.html">
+     Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/2.create rdd.html">
+     创建 RDD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/3.rdd operator.html">
+     RDD 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/4.cache.html">
+     RDD Cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/5.broadcast.html">
+     广播变量 &amp; 累加器
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../rdd/6.config.html">
+     Spark 配置项
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="0.html">
+   Spark SQL
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.lottery.html">
+     小汽车摇号分析
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.create df.html">
+     创建 DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.sql query.html">
+     SQL 语句
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.operators.html">
+     DataFrame 常用算子
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.join.html">
+     数据关联
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="6.functions.html">
+     函数
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Hive + Spark
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../mllib.html">
+   Spark MLlib
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stream/0.html">
+   Structured Streaming
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream/1.stream word count.html">
+     流动的 Word Count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream/2.mode.html">
+     Batch mode 和 Continuous mode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream/3.window.html">
+     Window 操作 &amp; Watermark
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../stream/4.kafka.html">
+     Spark + Kafka
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/sql/7.hive.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsql/7.hive.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/sql/7.hive.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hive">
+   Hive 架构与基本原理
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spark-with-hive">
+   Spark with Hive
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark-session-hive-metastore">
+     Spark Session + Hive Metastore
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spark-sql-hive-metastore">
+     spark-sql + Hive Metastore
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hive-on-spark">
+   Hive on Spark
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="hive-spark">
+<h1>Hive + Spark<a class="headerlink" href="#hive-spark" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>在 Hive 与 Spark 这对“万金油”组合中，Hive 擅长元数据管理，而 Spark的专长是高效的分布式计算，二者的结合可谓是“强强联合”。<br/>
+Spark 与 Hive 有两类集成方式，即 Spark with Hive 和 Hive on Spark.</p>
+</div>
+<div class="section" id="hive">
+<h2>Hive 架构与基本原理<a class="headerlink" href="#hive" title="Permalink to this headline">¶</a></h2>
+<p>Hive 的核心部件是 User Interface 和 Driver，而不论是元数据库、存储系统，还是计算引擎，Hive 都以“外包”、“可插拔”的方式交给第三方独立组件，如下图所示：</p>
+<p><img alt="jupyter" src="../_images/hive.webp" /></p>
+</div>
+<div class="section" id="spark-with-hive">
+<h2>Spark with Hive<a class="headerlink" href="#spark-with-hive" title="Permalink to this headline">¶</a></h2>
+<p>Hive Metastore 利用 RDBMS 来存储数据表的元信息，如表名、表类型、Schema、表数据的存储路径等。</p>
+<p>Spark SQL 通过访问 Hive MetaStore 这本“户口簿”，即可扩充数据访问来源，而这就是 Spark with Hive 集成方式的核心思想。</p>
+<p>我们有两种简单的途径实现 Spark with Hive 的集成方式：</p>
+<ol class="simple">
+<li><p>创建 SparkSession，访问本地或远程的 Hive MetaStore</p></li>
+<li><p>通过 spark-sql，访问本地或远程的 Hive MetaStore</p></li>
+</ol>
+<div class="section" id="spark-session-hive-metastore">
+<h3>Spark Session + Hive Metastore<a class="headerlink" href="#spark-session-hive-metastore" title="Permalink to this headline">¶</a></h3>
+<p>我们需要让 Spark 知道 Metastore 的访问地址，要传递这个消息，我们有两种办法：</p>
+<ol class="simple">
+<li><p>在创建 Spark Session 的时候，通过 config 函数来明确指定 hive.metastore.uris 参数</p></li>
+<li><p>让 Spark 读取 Hive 的配置文件 hive-site.xml，把 hive-site.xml 拷贝到 Spark 安装目录下的 conf 子目录即可</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="c1"># 明确指定 hive.metastore.uris</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="p">(</span><span class="n">SparkSession</span>
+         <span class="o">.</span><span class="n">builder</span>
+         <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;spark with hive&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;hive.metastore.uris&quot;</span><span class="p">,</span> <span class="s2">&quot;thrift://hiveHost:9083&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">enableHiveSupport</span><span class="p">()</span>
+         <span class="o">.</span><span class="n">getOrCreate</span><span class="p">())</span>
+
+<span class="c1"># 假设 Hive 有一张名为 salaries 的薪资表，每条数据包含 id 和 salary 两个字段</span>
+<span class="c1"># 读取 Hive 表，创建 DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;select * from salaries&quot;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spark-sql-hive-metastore">
+<h3>spark-sql + Hive Metastore<a class="headerlink" href="#spark-sql-hive-metastore" title="Permalink to this headline">¶</a></h3>
+<p>将配置好 hive.metastore.uris 参数的 hive-site.xml 文件放到 Spark 安装目录的 conf 下之后，我们就可以在 spark-sql 中直接使用 SQL 语句来查询或是处理 Hive 表了。</p>
+<p>但是这种方式需要 spark-sql CLI 和 Hive Metastore 安装在同一节点，即只能本地访问 Hive Metastore.</p>
+<p>local 模式下运行：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">-</span><span class="n">sql</span>
+</pre></div>
+</div>
+<p>集群上跑：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="o">-</span><span class="n">sql</span> <span class="o">--</span><span class="n">master</span> <span class="n">mesos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hive-on-spark">
+<h2>Hive on Spark<a class="headerlink" href="#hive-on-spark" title="Permalink to this headline">¶</a></h2>
+<p>Hive on Spark 是指 Hive 采用 Spark 作为其后端的分布式执行引擎，这里 Hive 唱主角。<br/>
+Hive on Spark: Hive Driver + Spark Core<br/>
+Spark with Hive: Spark SQL + Spark Core</p>
+<p>在准备好 Spark 集群后，我们就可以通过修改 hive-site.xml 中相关的配置项，来轻松完成 Hive on Spark 的集成，如下表所示：</p>
+<p><img alt="jupyter" src="../_images/hive-site.webp" /></p>
+<p>在配置好这3个参数后，我们就可以用 Hive SQL 向 Hive 提交查询请求了，计算引擎为 Spark.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sql"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="6.functions.html" title="previous page">函数</a>
+    <a class='right-next' id="next-link" href="../mllib.html" title="next page">Spark MLlib</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Summer Lucky Bright<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
